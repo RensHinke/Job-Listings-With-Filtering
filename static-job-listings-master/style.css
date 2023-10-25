@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&display=swap');
+
+:root {
+    --primaryColor: hsl(180, 29%, 50%);
+    --bgColor: hsl(180, 52%, 96%);
+    --filterColor: hsl(180, 31%, 95%);
+    --darkCyan: hsl(180, 8%, 52%);
+    --veryDarkCyan: hsl(180, 14%, 20%);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'League Spartan', sans-serif;
+    font-size: 15px;
+    background-color: var(--bgColor);
+}
+
+header {
+    height: 20vh;
+    background-color: var(--primaryColor);
+    background-image: url(./images/bg-header-desktop.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+main {
+    width: 80%;
+    margin: auto;
+}
+
+.card {
+    display: grid;
+    grid-template-columns: 12% 48% 40%;
+    padding: 16px;
+    margin-block-start: 20px;
+    margin-block-end: 20px;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.card-info {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    align-items: center;
+}
+
+/* Top part of card info */
+.card-info-top {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.company-name {
+    color: var(--primaryColor);
+}
+
+.card-tag-new, .card-tag-featured {
+    padding: 6px;
+    border-radius: 12px;
+    color: white;
+    font-size: 0.8rem;
+}
+
+.card-tag-new {
+    background-color: var(--primaryColor);
+}
+
+.card-tag-featured {
+    background-color: black;
+}
+
+/* Middle part of card info */
+.card-info-position {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* Bottom part of card info */
+.card-info-bottom {
+    color: var(--darkCyan);
+}
+
+.card-categories {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-category-button {
+    padding: 6px;
+    border: none;
+    border-radius: 4px;
+    color: var(--primaryColor);
+    background-color: var(--bgColor);
+    font-weight: 700;
+}
+
+.featured {
+    border-left: 4px solid var(--primaryColor)
+}
