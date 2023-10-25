@@ -6,6 +6,10 @@
     --filterColor: hsl(180, 31%, 95%);
     --darkCyan: hsl(180, 8%, 52%);
     --veryDarkCyan: hsl(180, 14%, 20%);
+
+    --filterWidth: 80%;
+    --filterHeight: 5vh;
+    --filterPadding: 18px;
 }
 
 *, *::before, *::after {
@@ -26,11 +30,25 @@ header {
     background-image: url(./images/bg-header-desktop.svg);
     background-repeat: no-repeat;
     background-size: cover;
+    position: relative;
+}
+
+.filterbar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: var(--filterWidth);
+    height: var(--filterHeight);
+    padding: 0 var(--filterPadding);
+    background-color: white;
+    position: absolute;
+    top: calc(100% - (var(--filterHeight) / 2));
+    left: calc((100% - var(--filterWidth)) / 2);
 }
 
 main {
     width: 80%;
-    margin: auto;
+    margin: 5vh auto;
 }
 
 .card {
@@ -58,10 +76,12 @@ main {
 
 .company-name {
     color: var(--primaryColor);
+    font-weight: 700;
 }
 
 .card-tag-new, .card-tag-featured {
     padding: 6px;
+    padding-bottom: 4px;
     border-radius: 12px;
     color: white;
     font-size: 0.8rem;
@@ -83,6 +103,9 @@ main {
 
 /* Bottom part of card info */
 .card-info-bottom {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     color: var(--darkCyan);
 }
 
@@ -100,6 +123,12 @@ main {
     color: var(--primaryColor);
     background-color: var(--bgColor);
     font-weight: 700;
+}
+
+.card-category-button:hover {
+    color: white;
+    background-color: var(--primaryColor);
+    cursor: pointer;
 }
 
 .featured {

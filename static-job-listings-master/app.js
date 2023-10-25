@@ -1,3 +1,11 @@
+let filters = {
+    role: [],
+    level: [],
+    languages: [],
+    tools: []
+}
+let jobListings = [];
+
 $(document).ready(function() {
     loadData();
 });
@@ -6,6 +14,7 @@ function loadData() {
     $.getJSON("data.json", function(response) {
         $.each(response, function(i, field) {
             console.log(field);
+            jobListings.push(field);
             createCard(field);
         })
     });
@@ -64,9 +73,23 @@ function createCardInfo(data) {
     $(cardInfoPosition).append(positionName);
 
     // CardInfoTimeAndPlace content
-    let timeAndPlaceInfo = $("<div></div>")
-    $(timeAndPlaceInfo).append(data.postedAt + "  &sdot;  " + data.contract + "  &sdot;  " + data.location);
-    $(cardInfoTimeAndPlace).append(timeAndPlaceInfo);
+    let postedAtInfo = $("<div></div>");
+    $(postedAtInfo).append(data.postedAt);
+    $(cardInfoTimeAndPlace).append(postedAtInfo);
+
+    let dot1 = $("<div>&sdot;</div>");
+    $(cardInfoTimeAndPlace).append(dot1);
+
+    let contractInfo = $("<div></div>");
+    $(contractInfo).append(data.contract);
+    $(cardInfoTimeAndPlace).append(contractInfo);
+
+    let dot2 = $("<div>&sdot;</div>");
+    $(cardInfoTimeAndPlace).append(dot2);
+
+    let locationInfo = $("<div></div>");
+    $(locationInfo).append(data.location);
+    $(cardInfoTimeAndPlace).append(locationInfo);
 
     $(cardInfo).append(cardInfoCompany);
     $(cardInfo).append(cardInfoPosition);
@@ -80,24 +103,105 @@ function createCardCategories(data) {
     // Add role
     let role = $("<button></button>").addClass("card-category-button");
     $(role).append(data.role);
+    $(role).click(function() {
+        addToFilters("role", data.role);
+    })
     $(cardCategories).append(role);
 
     // Add level
     let level = $("<button></button>").addClass("card-category-button");
     $(level).append(data.level);
+    $(level).click(function() {
+        addToFilters("level", data.level);
+    })
     $(cardCategories).append(level);
     
     data.languages.forEach(lang => {
         let languageButton = $("<button></button>").addClass("card-category-button");
         $(languageButton).append(lang);
+        $(languageButton).click(function() {
+            addToFilters("languages", lang);
+        })
         $(cardCategories).append(languageButton);
     });
 
     data.tools.forEach(tool => {
         let toolButton = $("<button></button>").addClass("card-category-button");
         $(toolButton).append(tool);
+        $(toolButton).click(function() {
+            addToFilters("tools", tool);
+        })
         $(cardCategories).append(toolButton);
     });
 
     return cardCategories;
+}
+
+function addToFilters(category, value) {
+    if (!filters[category].includes(value)) {
+        filters[category].push(value);
+    }
+    console.log(filters);
+    updateScreen();
+}
+
+function removeFiltersOnScreen() {
+    $(".filterbar").empty();
+}
+
+function displayFiltersOnScreen() {
+    for (let category in filters) {
+        filters[category].forEach(value => {
+            let filterButton = $("<button></button>").addClass("card-category-button");
+            $(filterButton).append(value);
+            // Remove filter
+            $(filterButton).click(function() {
+                filters[category].splice(filters[category].indexOf(value), 1);
+                updateScreen()
+            });
+            $(".filterbar").append(filterButton);
+        })
+    }
+}
+
+function removeJobsOnScreen() {
+    $("main").empty();
+}
+
+function addFilteredListings() {
+    const filteredListings = getFilteredListings();
+    for (let i in filteredListings) {
+        createCard(filteredListings[i]);
+    }
+}
+
+function getFilteredListings() {
+    let filteredListings = jobListings.filter(job => {
+        let allowed = true;
+        for (let category in filters) {
+            let jobCategoryValues;
+            if (!Array.isArray(job[category])) {
+                jobCategoryValues = [job[category]];
+            } else {
+                jobCategoryValues = job[category];
+            }
+            let intersection = getIntersectionOfArrays(jobCategoryValues, filters[category]);
+            if (filters[category].length > 0 && intersection.length < filters[category].length) {
+                allowed = false;
+            }
+        }
+        return allowed;
+    });
+    return filteredListings;
+}
+
+function getIntersectionOfArrays(arr1, arr2) {
+    return arr1.filter(element => arr2.includes(element));
+}
+
+function updateScreen() {
+    removeFiltersOnScreen();
+    displayFiltersOnScreen();
+    removeJobsOnScreen();
+    addFilteredListings();
 }
