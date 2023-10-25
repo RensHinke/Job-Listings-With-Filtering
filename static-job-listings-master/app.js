@@ -152,8 +152,14 @@ function removeFiltersOnScreen() {
 function displayFiltersOnScreen() {
     for (let category in filters) {
         filters[category].forEach(value => {
-            let filterButton = $("<button></button>").addClass("card-category-button");
-            $(filterButton).append(value);
+            let filterButton = $("<button></button>").addClass("card-category-filter-button");
+
+            let filterName = $("<div></div>").addClass("card-category-filter-name");
+            $(filterName).append(value);
+            $(filterButton).append(filterName);
+
+            let filterClose = $("<div>&#128940;</div>").addClass("card-category-filter-close");
+            $(filterButton).append(filterClose);
             // Remove filter
             $(filterButton).click(function() {
                 filters[category].splice(filters[category].indexOf(value), 1);

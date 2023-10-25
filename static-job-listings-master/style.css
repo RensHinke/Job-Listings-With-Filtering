@@ -7,9 +7,12 @@
     --darkCyan: hsl(180, 8%, 52%);
     --veryDarkCyan: hsl(180, 14%, 20%);
 
+    --cardBorderRadius: 4px;
+
     --filterWidth: 80%;
     --filterHeight: 5vh;
     --filterPadding: 18px;
+    --filterButtonBorderRadius: 4px;
 }
 
 *, *::before, *::after {
@@ -40,6 +43,7 @@ header {
     width: var(--filterWidth);
     height: var(--filterHeight);
     padding: 0 var(--filterPadding);
+    border-radius: var(--cardBorderRadius);
     background-color: white;
     position: absolute;
     top: calc(100% - (var(--filterHeight) / 2));
@@ -57,7 +61,7 @@ main {
     padding: 16px;
     margin-block-start: 20px;
     margin-block-end: 20px;
-    border-radius: 4px;
+    border-radius: var(--cardBorderRadius);
     background-color: white;
 }
 
@@ -116,10 +120,13 @@ main {
     gap: 10px;
 }
 
-.card-category-button {
+.card-category-button, .card-category-filter-name {
     padding: 6px;
+}
+
+.card-category-button {
     border: none;
-    border-radius: 4px;
+    border-radius: var(--filterButtonBorderRadius);
     color: var(--primaryColor);
     background-color: var(--bgColor);
     font-weight: 700;
@@ -129,6 +136,42 @@ main {
     color: white;
     background-color: var(--primaryColor);
     cursor: pointer;
+}
+
+.card-category-filter-button {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.card-category-filter-button:hover {
+    cursor: pointer;
+}
+
+.card-category-filter-button:hover .card-category-filter-close {
+    background-color: black;
+}
+
+.card-category-filter-name {
+    border: none;
+    border-top-left-radius: var(--filterButtonBorderRadius);
+    border-bottom-left-radius: var(--filterButtonBorderRadius);
+    color: var(--primaryColor);
+    background-color: var(--bgColor);
+    font-weight: 700;
+}
+
+.card-category-filter-close {
+    padding: 0 6px;
+    border: none;
+    font-size: 1.3rem;
+    border-top-right-radius: var(--filterButtonBorderRadius);
+    border-bottom-right-radius: var(--filterButtonBorderRadius);
+    color: white;
+    background-color: var(--primaryColor);
+    font-weight: 700;
 }
 
 .featured {
