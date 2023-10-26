@@ -52,6 +52,7 @@ header {
 
 .filterbar-filters {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
 }
 
@@ -76,6 +77,7 @@ main {
 .card {
     display: grid;
     grid-template-columns: 12% 48% 40%;
+    position: relative;
     padding: 16px;
     margin-block-start: 20px;
     margin-block-end: 20px;
@@ -114,11 +116,12 @@ main {
 }
 
 .card-tag-featured {
-    background-color: black;
+    background-color: var(--veryDarkCyan);
 }
 
 /* Middle part of card info */
 .card-info-position {
+    color: var(--veryDarkCyan);
     font-size: 1.2rem;
     font-weight: 700;
 }
@@ -197,5 +200,39 @@ main {
 }
 
 @media only screen and (max-width: 960px) {
+    main {
+        margin: 20vh auto;
+    }
 
+    .filterbar {
+        display: grid;
+        grid-template-columns: 80% 1fr;
+        height: fit-content;
+        top: 70%;
+        padding: 16px;
+    }
+    
+    .card {
+        grid-template-columns: none;
+        grid-template-rows: 10% 1fr 1fr;
+        margin-block-start: 40px;
+        margin-block-end: 40px;
+    }
+
+    .card img {
+        height: 50px;
+        margin-top: calc(-16px - 25px); /*padding and height / 2 */
+    }
+
+    .card-info {
+        gap: 10px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--darkCyan);
+    }
+
+    .card-categories {
+        padding-top: 16px;
+        justify-content: left;
+        flex-wrap: wrap;
+    }
 }
