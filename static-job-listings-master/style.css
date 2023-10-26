@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;700&display=swap');
+
+:root {
+    --primaryColor: hsl(180, 29%, 50%);
+    --bgColor: hsl(180, 52%, 96%);
+    --filterColor: hsl(180, 31%, 95%);
+    --darkCyan: hsl(180, 8%, 52%);
+    --veryDarkCyan: hsl(180, 14%, 20%);
+
+    --cardBorderRadius: 4px;
+
+    --filterWidth: 80%;
+    --filterHeight: 5vh;
+    --filterPadding: 18px;
+    --filterButtonBorderRadius: 4px;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'League Spartan', sans-serif;
+    font-size: 15px;
+    background-color: var(--bgColor);
+}
+
+header {
+    height: 20vh;
+    background-color: var(--primaryColor);
+    background-image: url(./images/bg-header-desktop.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.filterbar {
+    display: grid;
+    grid-template-columns: 95% 1fr;
+    align-items: center;
+    width: var(--filterWidth);
+    height: var(--filterHeight);
+    padding: 0 var(--filterPadding);
+    border-radius: var(--cardBorderRadius);
+    background-color: white;
+    position: absolute;
+    top: calc(100% - (var(--filterHeight) / 2));
+    left: calc((100% - var(--filterWidth)) / 2);
+}
+
+.filterbar-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.filterbar-clear-button {
+    border: none;
+    color: var(--darkCyan);
+    background-color: transparent;
+    font-weight: 700;
+}
+
+.filterbar-clear-button:hover {
+    color: var(--primaryColor);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+main {
+    width: 80%;
+    margin: 5vh auto;
+}
+
+.card {
+    display: grid;
+    grid-template-columns: 12% 48% 40%;
+    position: relative;
+    padding: 16px;
+    margin-block-start: 20px;
+    margin-block-end: 20px;
+    border-radius: var(--cardBorderRadius);
+    background-color: white;
+}
+
+.card-info {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    align-items: center;
+}
+
+/* Top part of card info */
+.card-info-top {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.company-name {
+    color: var(--primaryColor);
+    font-weight: 700;
+}
+
+.card-tag-new, .card-tag-featured {
+    padding: 6px;
+    padding-bottom: 4px;
+    border-radius: 12px;
+    color: white;
+    font-size: 0.8rem;
+}
+
+.card-tag-new {
+    background-color: var(--primaryColor);
+}
+
+.card-tag-featured {
+    background-color: var(--veryDarkCyan);
+}
+
+/* Middle part of card info */
+.card-info-position {
+    color: var(--veryDarkCyan);
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* Bottom part of card info */
+.card-info-bottom {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--darkCyan);
+}
+
+.card-categories {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-category-button, .card-category-filter-name {
+    padding: 6px;
+}
+
+.card-category-button {
+    border: none;
+    border-radius: var(--filterButtonBorderRadius);
+    color: var(--primaryColor);
+    background-color: var(--bgColor);
+    font-weight: 700;
+}
+
+.card-category-button:hover {
+    color: white;
+    background-color: var(--primaryColor);
+    cursor: pointer;
+}
+
+.card-category-filter-button {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.card-category-filter-button:hover {
+    cursor: pointer;
+}
+
+.card-category-filter-button:hover .card-category-filter-close {
+    background-color: black;
+}
+
+.card-category-filter-name {
+    border: none;
+    border-top-left-radius: var(--filterButtonBorderRadius);
+    border-bottom-left-radius: var(--filterButtonBorderRadius);
+    color: var(--primaryColor);
+    background-color: var(--bgColor);
+    font-weight: 700;
+}
+
+.card-category-filter-close {
+    padding: 0 6px;
+    border: none;
+    font-size: 1.3rem;
+    border-top-right-radius: var(--filterButtonBorderRadius);
+    border-bottom-right-radius: var(--filterButtonBorderRadius);
+    color: white;
+    background-color: var(--primaryColor);
+    font-weight: 700;
+}
+
+.featured {
+    border-left: 4px solid var(--primaryColor)
+}
+
+@media only screen and (max-width: 960px) {
+    main {
+        margin: 20vh auto;
+    }
+
+    .filterbar {
+        display: grid;
+        grid-template-columns: 80% 1fr;
+        height: fit-content;
+        top: 70%;
+        padding: 16px;
+    }
+    
+    .card {
+        grid-template-columns: none;
+        grid-template-rows: 10% 1fr 1fr;
+        margin-block-start: 40px;
+        margin-block-end: 40px;
+    }
+
+    .card img {
+        height: 50px;
+        margin-top: calc(-16px - 25px); /*padding and height / 2 */
+    }
+
+    .card-info {
+        gap: 10px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--darkCyan);
+    }
+
+    .card-categories {
+        padding-top: 16px;
+        justify-content: left;
+        flex-wrap: wrap;
+    }
+}
