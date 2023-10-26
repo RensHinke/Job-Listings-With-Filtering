@@ -14,6 +14,12 @@ function loadData() {
     $.getJSON("data.json", function(response) {
         $.each(response, function(i, field) {
             $(".filterbar").hide();
+            $(".filterbar-clear-button").click(function() {
+                for (let category in filters) {
+                    filters[category] = [];
+                }
+                updateScreen();
+            });
             jobListings.push(field);
             createCard(field);
         })
@@ -145,7 +151,7 @@ function addToFilters(category, value) {
 }
 
 function removeFiltersOnScreen() {
-    $(".filterbar").empty();
+    $(".filterbar-filters").empty();
 }
 
 function displayFiltersOnScreen() {
@@ -166,7 +172,7 @@ function displayFiltersOnScreen() {
                 filters[category].splice(filters[category].indexOf(value), 1);
                 updateScreen()
             });
-            $(".filterbar").append(filterButton);
+            $(".filterbar-filters").append(filterButton);
         })
     }
     // Hide filterbar if there are no currently selected filters

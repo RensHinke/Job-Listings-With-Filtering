@@ -37,9 +37,9 @@ header {
 }
 
 .filterbar {
-    display: flex;
+    display: grid;
+    grid-template-columns: 95% 1fr;
     align-items: center;
-    gap: 20px;
     width: var(--filterWidth);
     height: var(--filterHeight);
     padding: 0 var(--filterPadding);
@@ -48,6 +48,24 @@ header {
     position: absolute;
     top: calc(100% - (var(--filterHeight) / 2));
     left: calc((100% - var(--filterWidth)) / 2);
+}
+
+.filterbar-filters {
+    display: flex;
+    gap: 20px;
+}
+
+.filterbar-clear-button {
+    border: none;
+    color: var(--darkCyan);
+    background-color: transparent;
+    font-weight: 700;
+}
+
+.filterbar-clear-button:hover {
+    color: var(--primaryColor);
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 main {
@@ -176,4 +194,8 @@ main {
 
 .featured {
     border-left: 4px solid var(--primaryColor)
+}
+
+@media only screen and (max-width: 960px) {
+
 }
